@@ -1,0 +1,3 @@
+Function find_subtrees Took 0.017 ms
+10
+13
