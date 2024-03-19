@@ -86,26 +86,6 @@ class BinaryTree:
         with open(filename, 'w') as f:
             f.write('{\n' + self.export_tree_with_ids(self.root) + '}')
 
-    # def same(self, r: Node, s: Node):
-    #     if r is None and s is None:
-    #         return True
-    #
-    #     if r and s and r.value == s.value:
-    #         return self.same(r.right, s.right) and self.same(r.left, s.left)
-    #
-    #     return False
-    #
-    # def is_subtree(self, root: Node, sub_root: Node) -> bool:
-    #     if sub_root is None:
-    #         return True
-    #
-    #     if root is None:
-    #         return False
-    #
-    #     if self.same(root, sub_root):
-    #         return True
-    #     return self.is_subtree(root.left, sub_root) or self.is_subtree(root.right, sub_root)
-
     def find_subtrees(self, subtree_structure):
         def dfs(node):
             if node is None:
@@ -139,3 +119,23 @@ class BinaryTree:
                         nodes[right_id] = Node(right_value, right_id)
                     node.right = nodes[right_id]
         self.root = nodes[1]
+
+    # def same(self, r: Node, s: Node):
+    #     if r is None and s is None:
+    #         return True
+    #
+    #     if r and s and r.value == s.value:
+    #         return self.same(r.right, s.right) and self.same(r.left, s.left)
+    #
+    #     return False
+    #
+    # def is_subtree(self, root: Node, sub_root: Node) -> bool:
+    #     if sub_root is None:
+    #         return True
+    #
+    #     if root is None:
+    #         return False
+    #
+    #     if self.same(root, sub_root):
+    #         return True
+    #     return self.is_subtree(root.left, sub_root) or self.is_subtree(root.right, sub_root)

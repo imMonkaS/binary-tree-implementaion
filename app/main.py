@@ -1,35 +1,32 @@
-import time
-from functools import wraps
+from tests import *
 
-from tree import BinaryTree
-from utils import draw_tree, dict_from_file, SOURCES_PATH
+"""
+TODO:
+Статистика
+Function random_insertion for 2 mil Took 25180.882 ms or 25.180882 s
+Function read_tree for 2 mil Took 34106.576 ms or 34.106576 s
 
+заполнение слишком медленное, нужно подумать как быстрее инсёртить, и как быстрее считывать файлы
+идея для файлов: можно избавиться от кортежей в виде ключа, тогда время для огромного кол-ва данных 100%
+уменьшится
+идея имеет право на существование тк из-за того что для каждого родителя прописаны дети,
+их значения и так легко получить, в таком случае у родителей достаточно писать идшник
+Замечание: для рута нужно как-то прописывать значение, потому что по схеме, приведенной
+сверху значение для рута не будет нигде прописано (он сирота xD)
+
+При этом сам алгоритма поиска работает не плохо:
+2 миллиона данных за +- полсекунды
+
+Если решить проблему с заполнением то лабу можно считать завершенной
+
+Стоит просмотреть код ещё раз, и возможно провести некий рефакторинг
+
+"""
 
 def main():
-    bt = BinaryTree()
-    subtree = BinaryTree()
-
-    bt.read_tree_from_dict(dict_from_file(SOURCES_PATH + 'tree.txt'))
-    subtree.read_tree_from_dict(dict_from_file(SOURCES_PATH + 'subtree.txt'))
-    # bt.random_insertion(10, 12, 20)
-
-    # bt.print_full_tree()
-
-    # -----------TIME MEASURING-------------
-    with open(SOURCES_PATH + '20nodes_output.txt', 'w') as output_file:
-        start_time = time.perf_counter()
-        nodes = bt.find_subtrees(subtree.root)
-        end_time = time.perf_counter()
-        total_time = end_time - start_time
-
-        output_file.write(f'Function find_subtrees Took {total_time*1000:.3f} ms\n')
-
-        for node in nodes:
-            output_file.write(str(node.id) + '\n')
-    # -------------------------------------
-
-    # bt.export_tree_with_ids_to_file(SOURCES_PATH + 'tree20nodes.txt')
-    # subtree.export_tree_with_ids_to_file(SOURCES_PATH + 'subtree3nodes.txt')
+    # twenty_nodes_test()
+    # two_million_nodes_test()
+    test_insertion()
 
 
 if __name__ == '__main__':

@@ -1,30 +1,9 @@
-from functools import wraps
-import time
-
 import matplotlib.pyplot as plt
 import networkx as nx
 
 from typing import Tuple, Dict, List, Union, Optional
 
 SOURCES_PATH = 'app/sources/'
-
-
-def print_execution_time(func, filename: str = ''):
-    output_file = open('20nodes_output.txt', 'w')
-
-    start_time = time.perf_counter()
-    nodes = func()
-    end_time = time.perf_counter()
-    total_time = end_time - start_time
-
-    # output_file.write(f'Function find_subtrees Took {total_time * 1000:.3f} ms\n')
-    print(f'Function find_subtrees Took {total_time * 1000:.3f} ms\n')
-
-    # for node in nodes:
-    #     output_file.write(node.id + '\n')
-
-    output_file.close()
-    return nodes
 
 
 def draw_tree(

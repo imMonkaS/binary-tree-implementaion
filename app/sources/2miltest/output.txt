@@ -1,0 +1,6 @@
+Function find_subtrees Took 583.592 ms or 0.583592 s
+1610556
+525339
+1062929
+644930
+299331
