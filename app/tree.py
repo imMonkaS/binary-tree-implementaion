@@ -49,10 +49,10 @@ class BinaryTree:
 
     def print_tree_ids_to_file(self, node, output_file: str, indent=""):
         if node is not None:
-            with open(output_file, 'w') as f:
-                f.write(indent + str(node.id))
-            self.print_tree_ids(node.left, indent + "  ")
-            self.print_tree_ids(node.right, indent + "  ")
+            with open(output_file, 'a') as f:
+                f.write(indent + str(node.id) + '\n')
+            self.print_tree_ids_to_file(node.left, output_file, indent + "  ")
+            self.print_tree_ids_to_file(node.right, output_file, indent + "  ")
 
     def random_insertion(self, start: int, end: int, amount: int):
         values = [random.randint(start, end) for _ in range(amount)]

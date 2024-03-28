@@ -1,5 +1,6 @@
 from tests import *
 
+from utils import randomly_generate_tree_and_subtree_files
 """
 TODO:
 Статистика
@@ -23,10 +24,23 @@ Function read_tree for 2 mil Took 34106.576 ms or 34.106576 s
 
 """
 
+
 def main():
-    # twenty_nodes_test()
-    # two_million_nodes_test()
-    test_insertion()
+    # randomly_generate_tree_and_subtree_files(
+    #     10,
+    #     3,
+    #     SOURCES_PATH + 'report/10nodes/tree.txt',
+    #     SOURCES_PATH + 'report/10nodes/subtree.txt',
+    #     SOURCES_PATH + 'report/10nodes/tree.png',
+    #     SOURCES_PATH + 'report/10nodes/subtree.png',
+    # )
+
+    ultimate_test(
+        SOURCES_PATH + 'report/10nodes/tree.txt',
+        SOURCES_PATH + 'report/10nodes/subtree.txt',
+        SOURCES_PATH + 'report/10nodes/output.txt',
+        SOURCES_PATH + 'report/10nodes/time.txt'
+    )
 
 
 if __name__ == '__main__':

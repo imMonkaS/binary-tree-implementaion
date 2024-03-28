@@ -1,0 +1,6 @@
+2024-03-29 01:27:58.094644: Function find_subtrees Took 1.425 ms or 0.001425 s
+
+2024-03-29 01:28:08.033152: Function find_subtrees Took 1.552 ms or 0.001552 s
+
+2024-03-29 01:28:55.587257: Function find_subtrees Took 1.581 ms or 0.001581 s
+
