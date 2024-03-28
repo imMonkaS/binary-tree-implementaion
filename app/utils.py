@@ -10,7 +10,7 @@ SOURCES_PATH = 'app/sources/'
 
 
 def draw_tree(
-        tree: Dict[Tuple[int, Union[int, str]], List[Tuple[int, Union[int, str]]]],
+        tree: Dict[int, List[Tuple[int, Union[int, str]]]],
         show_tree: bool = False,
         fig_size: Tuple[int, int] = (12, 12),
         show_ids: bool = False,
@@ -20,14 +20,12 @@ def draw_tree(
     graph = nx.DiGraph()
 
     id_to_value = {}
-
-    for node, children in tree.items():
-        if node[0] not in id_to_value.keys():
-            id_to_value[node[0]] = f'{node[0]}: {node[1]}' if show_ids else node[1]
+    id_to_value[1] = f'1: {tree["root_value"]}' if show_ids else tree["root_value"]
+    for node_id, children in list(tree.items())[1:]:
         for child in children:
             if child[0] not in id_to_value.keys():
                 id_to_value[child[0]] = f'{child[0]}: {child[1]}' if show_ids else child[1]
-            graph.add_edge(node[0], child[0])
+            graph.add_edge(node_id, child[0])
 
     pos = nx.drawing.nx_agraph.graphviz_layout(graph, prog='dot')
     plt.figure(figsize=fig_size)

@@ -78,14 +78,16 @@ class BinaryTree:
     def export_tree_with_ids(self, node):
         if node is None:
             return ""
-        result = f"({node.id}, {node.value}): ["
-        if node.left:
-            result += f"({node.left.id}, {node.left.value})"
-        if node.right and node.left:
-            result += ", "
-        if node.right:
-            result += f"({node.right.id}, {node.right.value})"
-        result += "],\n"
+        result = ''
+        if node.left or node.right:
+            result += f"{node.id}: ["
+            if node.left:
+                result += f"({node.left.id}, {node.left.value})"
+            if node.right and node.left:
+                result += ", "
+            if node.right:
+                result += f"({node.right.id}, {node.right.value})"
+            result += "],\n"
         result += self.export_tree_with_ids(node.left)
         result += self.export_tree_with_ids(node.right)
         return result
@@ -96,7 +98,7 @@ class BinaryTree:
 
     def export_tree_with_ids_to_file(self, filename):
         with open(filename, 'w') as f:
-            f.write('{\n' + self.export_tree_with_ids(self.root) + '}')
+            f.write('{\n' + f"'root_value': {self.root.value},\n" + self.export_tree_with_ids(self.root) + '}')
 
     def find_subtrees(self, subtree_structure):
         def dfs(node):
@@ -128,10 +130,9 @@ class BinaryTree:
 
     def read_tree_from_dict(self, tree_dict):
         nodes = {}
-        for node_id_value, children in tree_dict.items():
-            node_id, value = node_id_value
-            if node_id not in nodes:
-                nodes[node_id] = Node(value, node_id)
+        nodes[1] = Node(tree_dict['root_value'], 1)
+
+        for node_id, children in list(tree_dict.items())[1:]:
             node = nodes[node_id]
             if children:
                 left_child, right_child = children[0], children[1] if len(children) > 1 else None
