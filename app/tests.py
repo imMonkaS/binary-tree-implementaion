@@ -3,6 +3,30 @@ from utils import SOURCES_PATH, dict_from_file, draw_tree
 import time
 
 
+def two_million_random_test():
+    bt = BinaryTree()
+    subtree = BinaryTree()
+
+    start_time = time.perf_counter()
+    bt.random_insertion(10, 15, 5 * 10**5)
+    end_time = time.perf_counter()
+    total_time = end_time - start_time
+    print(f'Function random_insertion for 2 million nodes Took {total_time * 1000:.3f} ms or {total_time:.6f} s\n')
+
+    subtree.random_insertion(10, 12, 5)
+
+    # -----------TIME MEASURING-------------
+    start_time = time.perf_counter()
+    nodes = bt.find_subtrees(subtree.root)
+    end_time = time.perf_counter()
+    total_time = end_time - start_time
+
+    print(f'Function find_subtrees Took {total_time * 1000:.3f} ms or {total_time:.6f} s\n')
+
+    for node in nodes:
+        print(str(node.id) + '\n')
+    # -------------------------------------
+
 def two_million_nodes_test():
     bt = BinaryTree()
     subtree = BinaryTree()
@@ -64,6 +88,8 @@ def twenty_nodes_test():
 
     # bt.export_tree_with_ids_to_file(SOURCES_PATH + 'tree20nodes.txt')
     # subtree.export_tree_with_ids_to_file(SOURCES_PATH + 'subtree3nodes.txt')
+    # draw_tree(dict_from_file(SOURCES_PATH + 'tree.txt'), make_image=SOURCES_PATH + 'testSubtreeFinding1.png')
+    # draw_tree(dict_from_file(SOURCES_PATH + 'subtree.txt'), make_image=SOURCES_PATH + 'testSubtreeFinding2.png')
 
 
 def test_insertion():

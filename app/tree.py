@@ -11,8 +11,6 @@ class Node:
     def equals(self, other):
         if other is None:
             return False
-        if self.value != other.value:
-            return False
         left_equal = self.left.equals(other.left) if self.left and other.left else self.left is other.left
         right_equal = self.right.equals(other.right) if self.right and other.right else self.right is other.right
         return left_equal and right_equal
@@ -27,6 +25,7 @@ class BinaryTree:
         if node is None:
             self.nodes_amount += 1
             return Node(value, self.nodes_amount)
+
         if random.randint(0, 1):
             node.left = self.insert_node(value, node.left)
         else:
@@ -41,6 +40,19 @@ class BinaryTree:
             print(indent + str(node.value))
             self.print_tree(node.left, indent + "  ")
             self.print_tree(node.right, indent + "  ")
+
+    def print_tree_ids(self, node, indent=""):
+        if node is not None:
+            print(indent + str(node.id))
+            self.print_tree_ids(node.left, indent + "  ")
+            self.print_tree_ids(node.right, indent + "  ")
+
+    def print_tree_ids_to_file(self, node, output_file: str, indent=""):
+        if node is not None:
+            with open(output_file, 'w') as f:
+                f.write(indent + str(node.id))
+            self.print_tree_ids(node.left, indent + "  ")
+            self.print_tree_ids(node.right, indent + "  ")
 
     def random_insertion(self, start: int, end: int, amount: int):
         values = [random.randint(start, end) for _ in range(amount)]
@@ -92,6 +104,21 @@ class BinaryTree:
                 return []
             result = []
             if node.equals(subtree_structure):
+                self.print_tree_ids(node)
+                result.append(node)
+            result.extend(dfs(node.left))
+            result.extend(dfs(node.right))
+            return result
+
+        return dfs(self.root)
+
+    def find_subtrees_and_print_to_file(self, subtree_structure, output_file: str):
+        def dfs(node):
+            if node is None:
+                return []
+            result = []
+            if node.equals(subtree_structure):
+                self.print_tree_ids_to_file(node, output_file)
                 result.append(node)
             result.extend(dfs(node.left))
             result.extend(dfs(node.right))
