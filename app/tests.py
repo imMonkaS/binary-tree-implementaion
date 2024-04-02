@@ -15,6 +15,7 @@ def test_file_generation():
     bt_from_file.read_tree_from_dict(dict_from_file(name))
     bt_from_file.print_full_tree()
 
+
 def ultimate_test(tree_file: str, subtree_file: str, output_file: str, time_file: str):
     with open(output_file, 'w') as f:
         f.write('')
@@ -28,12 +29,41 @@ def ultimate_test(tree_file: str, subtree_file: str, output_file: str, time_file
 
     # -----------TIME MEASURING-------------
     with open(time_file, 'a') as f:
-        nodes = bt.find_subtrees_and_print_to_file(subtree.root, output_file)
+        bt.find_subtrees_and_print_to_file(subtree.root, output_file)
         end_time = time.perf_counter()
         total_time = end_time - start_time
 
         f.write(f'{datetime.datetime.now()}: Выполнение кода заняло {total_time*1000:.3f} мс или {total_time:.6f} с\n\n')
     # -------------------------------------
+
+
+def ultimate_random_test(
+        output_file: str,
+        time_file: str,
+        tree_start: int = 0,
+        tree_end: int = 100,
+        tree_amount: int = 10,
+        subtree_start: int = 0,
+        subtree_end: int = 100,
+        subtree_amount: int = 5,
+):
+    with open(output_file, 'w') as f:
+        f.write('')
+
+    start_time = time.perf_counter()
+    bt = BinaryTree()
+    subtree = BinaryTree()
+
+    bt.random_insertion(tree_start, tree_end, tree_amount)
+    subtree.random_insertion(subtree_start, subtree_end, subtree_amount)
+
+    # -----------TIME MEASURING-------------
+    with open(time_file, 'a') as f:
+        bt.find_subtrees_and_print_to_file(subtree.root, output_file)
+        end_time = time.perf_counter()
+        total_time = end_time - start_time
+
+        f.write(f'{datetime.datetime.now()}: Выполнение кода заняло {total_time*1000:.3f} мс или {total_time:.6f} с\n\n')
 
 
 def two_million_random_test():

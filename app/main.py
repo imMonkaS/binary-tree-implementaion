@@ -26,20 +26,21 @@ Function read_tree for 2 mil Took 34106.576 ms or 34.106576 s
 
 
 def main():
+    nodes = 10000000
     # randomly_generate_tree_and_subtree_files(
-    #     10,
-    #     3,
-    #     SOURCES_PATH + 'report/10nodes/tree.txt',
-    #     SOURCES_PATH + 'report/10nodes/subtree.txt',
-    #     SOURCES_PATH + 'report/10nodes/tree.png',
-    #     SOURCES_PATH + 'report/10nodes/subtree.png',
+    #     nodes,
+    #     7,
+    #     SOURCES_PATH + f'report/{nodes}nodes/tree.txt',
+    #     SOURCES_PATH + f'report/{nodes}nodes/subtree.txt',
+    #     # SOURCES_PATH + f'report/{nodes}nodes/tree.png',
+    #     # SOURCES_PATH + f'report/{nodes}nodes/subtree.png',
     # )
 
     ultimate_test(
-        SOURCES_PATH + 'report/10nodes/tree.txt',
-        SOURCES_PATH + 'report/10nodes/subtree.txt',
-        SOURCES_PATH + 'report/10nodes/output.txt',
-        SOURCES_PATH + 'report/10nodes/time.txt'
+        SOURCES_PATH + f'report/{nodes}nodes/tree.txt',
+        SOURCES_PATH + f'report/{nodes}nodes/subtree.txt',
+        SOURCES_PATH + f'report/{nodes}nodes/output.txt',
+        SOURCES_PATH + f'report/{nodes}nodes/time.txt'
     )
 
 

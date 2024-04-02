@@ -9,6 +9,14 @@ import time
 SOURCES_PATH = 'app/sources/'
 
 
+def adjust_positions(pos, graph):
+    for node in graph.nodes():
+        if len(list(graph.successors(node))) == 1:  # if the node has only one child
+            child = list(graph.successors(node))[0]
+            pos[child] = (pos[node][0] + (0.1 if child < node else -0.1), pos[child][1])
+    return pos
+
+
 def draw_tree(
         tree: Dict[int, List[Tuple[int, Union[int, str]]]],
         show_tree: bool = False,
@@ -27,7 +35,8 @@ def draw_tree(
                 id_to_value[child[0]] = f'{child[0]}: {child[1]}' if show_ids else child[1]
             graph.add_edge(node_id, child[0])
 
-    pos = nx.drawing.nx_agraph.graphviz_layout(graph, prog='dot')
+    pos = adjust_positions(nx.drawing.nx_agraph.graphviz_layout(graph, prog='dot'), graph)
+    # pos = nx.drawing.nx_agraph.graphviz_layout(graph, prog='dot')
     plt.figure(figsize=fig_size)
     nx.draw(graph, pos, with_labels=True, node_color=color, arrows=False, labels=id_to_value)
     if make_image is not None:
