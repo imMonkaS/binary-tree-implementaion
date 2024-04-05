@@ -1,8 +1,0 @@
-5
-  13
-    16
-    14
-
-
-
-Function find_subtrees Took 1.661 ms or 0.001661 s

@@ -4,12 +4,17 @@ from tree import BinaryTree
 from utils import SOURCES_PATH, dict_from_file, draw_tree
 import time
 
+"""
+Тесты, которые я сделал чтобы удобнее было проверять работу кода.
+"""
+
+
 def test_file_generation():
     name = SOURCES_PATH + '1genfiletest.txt'
     bt = BinaryTree()
     bt.random_insertion(0, 100, 20)
 
-    bt.export_tree_with_ids_to_file(name)
+    bt.export_tree_to_file(name)
 
     bt_from_file = BinaryTree()
     bt_from_file.read_tree_from_dict(dict_from_file(name))
@@ -20,20 +25,24 @@ def ultimate_test(tree_file: str, subtree_file: str, output_file: str, time_file
     with open(output_file, 'w') as f:
         f.write('')
 
-    start_time = time.perf_counter()
     bt = BinaryTree()
     subtree = BinaryTree()
 
+    start_filling_time = time.perf_counter()
     bt.read_tree_from_dict(dict_from_file(tree_file))
     subtree.read_tree_from_dict(dict_from_file(subtree_file))
+    end_filling_time = time.perf_counter()
 
     # -----------TIME MEASURING-------------
     with open(time_file, 'a') as f:
+        algo_time = time.perf_counter()
         bt.find_subtrees_and_print_to_file(subtree.root, output_file)
-        end_time = time.perf_counter()
-        total_time = end_time - start_time
+        end_algo_time = time.perf_counter()
+        total_algo_time = end_algo_time - algo_time
 
-        f.write(f'{datetime.datetime.now()}: Выполнение кода заняло {total_time*1000:.3f} мс или {total_time:.6f} с\n\n')
+        total_filling_time = end_filling_time - start_filling_time
+        f.write(f'{datetime.datetime.now()}: Выполнение считывания дерева заняло {total_filling_time*1000:.3f} мс или {total_filling_time:.6f} с\n')
+        f.write(f'{datetime.datetime.now()}: Выполнение алгоритма заняло {total_algo_time*1000:.3f} мс или {total_algo_time:.6f} с\n\n')
     # -------------------------------------
 
 
